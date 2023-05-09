@@ -1,5 +1,8 @@
 import pathlib
 import random
+from rich import print
+import sys
+from termcolor import colored
 
 WORDLIST = pathlib.Path("word_list.txt")
 
@@ -33,9 +36,17 @@ def check_guess(guess, answer):
         return True
     return False
 
+def add_guess(guess):
+    for i in range(6):
+        if board[i][0] == "_":
+            for j in range(5):
+                board[i][j] = guess[j]
+            break
+
+answer = answer()
+
 def main():
 
-    answer = answer()
 
     for i in range(6):
 
@@ -43,11 +54,12 @@ def main():
             guess = input("guess a word\n")
 
             if len(guess) == 5:
-                check_guess(guess, answer)
+                add_guess(guess)
+                print_board()
                 break
         
             else:
                 print("Not a valid entry")
 
 create_board()
-print_board()
+main()

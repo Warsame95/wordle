@@ -1,6 +1,8 @@
 import pathlib
 import random
 from rich import print
+from rich.console import Console
+from rich.theme import Theme
 import sys
 from termcolor import colored
 
@@ -36,11 +38,25 @@ def check_guess(guess, answer):
         return True
     return False
 
-def add_guess(guess):
+""" def add_colour(guess, answer):
+    for letter, correct in zip(guess, answer):
+        if letter == correct: """
+
+    
+
+def add_guess(guess, answer):
     for i in range(6):
         if board[i][0] == "_":
             for j in range(5):
-                board[i][j] = guess[j]
+                #print(guess.upper()[j] + " " + answer[j])
+                if guess.upper()[j] == answer[j]:
+                    style = "bold white on green"
+                elif guess.upper()[j] in answer:
+                    style = "bold white on yellow"
+                else:
+                    style = "white on #666666"
+                
+                board[i][j] = f"[{style}]{guess.upper()[j]}"
             break
 
 answer = answer()
@@ -54,7 +70,7 @@ def main():
             guess = input("guess a word\n")
 
             if len(guess) == 5:
-                add_guess(guess)
+                add_guess(guess, answer)
                 print_board()
                 break
         

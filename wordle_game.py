@@ -34,7 +34,7 @@ def answer():
 
 
 def check_guess(guess, answer):
-    if guess == answer:
+    if guess.upper() == answer.upper():
         return True
     return False
 
@@ -42,7 +42,11 @@ def check_guess(guess, answer):
     for letter, correct in zip(guess, answer):
         if letter == correct: """
 
-    
+def success_message():
+    print("Cogratulations, you got the word correct!!")
+
+def fail_message(answer):
+    print("The word is " + answer)
 
 def add_guess(guess, answer):
     for i in range(6):
@@ -76,6 +80,12 @@ def main():
         
             else:
                 print("Not a valid entry")
+        
+        if check_guess(guess, answer):
+            return success_message()
+        
+        elif i == 5:
+            return fail_message(answer)
 
 create_board()
 main()

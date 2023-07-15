@@ -71,7 +71,7 @@ def main():
     for i in range(6):
 
         while True:
-            guess = input("guess a word\n")
+            guess = input("Guess word: ")
 
             if len(guess) == 5:
                 add_guess(guess, answer)
